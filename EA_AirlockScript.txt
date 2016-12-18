@@ -1,0 +1,149 @@
+@RunScript{
+	WriteLine to dsply = "Initialising script..."
+	@trigaction
+	}
+	
+  //variables don't work so we'll use a key for now, based off when I tried to make a config
+  
+	AirlockDoorIntLt = "intdr"
+	AirlockDoorExtLt = "extdr"
+	AirlockDebug = "dsply"
+	AirlockVentLt = "vnt"
+
+	
+@trigaction{
+	WriteNew to dsply = "Delaying System Scan"
+	WriteLine to dsply = "5..."
+	Delay 1000
+	Write to dsply = "4..."
+	Delay  1000
+	Write to dsply = "3..."
+	Delay 1000
+	Write to dsply = "2..."
+	Delay 1000
+	Write to dsply = "1..."
+	Delay 1000
+	WriteLine to dsply = "Scanning System"	
+	If OnOff of dmb = False
+	{
+		WriteLine to dsply = "Airlock sensors failed to detect a player"
+		@emptystate
+	}
+	Else
+	{
+		WriteLine to dsply = "Airlock sensors are detecting a player inside the airlock"
+		@trigstate
+	}
+}
+
+@actionstep1{
+	Open_On extdr
+	When Open of extdr = True
+	WriteLine to dsply = "Outer Doors Opened"
+	@actionstep2
+}
+
+@actionstep2{
+	WriteLine to dsply = "Delaying for 10 seconds"
+	Delay 10000
+	WriteLine to dsply = "Delay Complete"
+	Open_Off extdr
+	When Open of extdr = False
+	WriteLine to dsply = "Outer Doors Closed"
+	Depressurize_Off vnt
+	WriteLine to dsply = "Pressurizing Airlock"
+	When Room pressure of vnt = 100
+	Open_On intdr
+	WriteLine to dsply = "Waiting for player to leave airlock"
+	When OnOff of dmb = False
+	@trigaction
+}
+
+@doorson{
+	OnOff_On extdr
+	OnOff_On intdr
+}
+
+@doorsoff{
+	OnOff_Off extdr
+	OnOff_Off intdr
+}
+
+@emptystate{
+	If Room pressure of vnt < 100
+	{ 
+		Open_Off extdr 
+		Open_Off intdr
+		When Open of extdr = False
+		When Open of intdr = False
+		Depressurize_Off vnt
+		@trigaction	
+	} 
+	Else
+	{
+		Open_Off extdr
+		Open_On intdr
+		When Open of extdr = False
+		When Open of intdr = True
+		Depressurize_Off vnt
+		@trigaction
+	}
+}
+
+@trigstate{
+	WriteLine to dsply = "Scanning Air Vent"
+	If Depressurize of vnt = False
+	{
+	WriteLine to dsply = "Air Vent is not currently depressurizing"
+	@depress
+	}
+	Else
+	{
+	WriteLine to dsply = "Air Vent is alredy depressurizing"
+	@press
+	}
+}
+
+@depress{
+	WriteNew to dsply = "Starting depressurization sequence"
+	If Room pressure of vnt != 0 
+	{
+	WriteLine to dsply = "Closing Doors"
+	Open_Off intdr 
+	Open_Off extdr
+	When Open of extdr = False
+	When Open of intdr = False
+	WriteLine to dsply = "Airlock Doors Closed"
+	Depressurize_On vnt
+	WriteLine to dsply = "Depressurizing Vent"
+	Open_On AirlockVentDoorLt
+	WriteLine to dsply = "Waiting for depressurization to complete"
+	@creativetest
+	Open_Off AirlockVentDoorLt 
+	@actionstep1
+	} 
+	Else
+	{
+	@actionstep1
+	}
+}	
+
+@press{
+	If  Room pressure of vnt != 100
+	{
+			Open_Off extdr 
+			Depressurize_Off vnt
+			@trigaction
+	}
+	Else
+	{
+			Open_On intdr
+			@trigaction			
+	} 
+}
+
+
+@creativetest{
+	WriteLine to dsply = "Delaying for 5 seconds..."
+	Delay 5000
+	}
