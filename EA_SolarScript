@@ -1,0 +1,30 @@
+Solar Panel Script
+
+Rotates solar panels until they are conducting the user defined amount of power
+
+@Variables 
+minpower = 70 
+ 
+@RunScript{ 
+@calculate 
+} 
+ 
+@calculate{ 
+	if Max Output of SolarMain < value of minpower 
+	{ 
+	WriteNew to SolarLCD = "Power below \minpower detected, starting rotors..." 
+	Velocity of (solarRotors) = -1 
+	WriteLine to SolarLCD = "Rotors Started" 
+	} 
+	Else if Max Output of SolarMain < 1
+	{
+	Write New to SolarLCD = "Zero input detected, investigation recommended."
+	}
+	Else 
+	{ 
+	WriteNew to SolarLCD = "Power above \minpower detected, stopping rotors..." 
+	Velocity of (solarRotors) = 0 
+	WriteLine to SolarLCD = "Rotors Stopped" 
+	} 
+	@RunScript 
+} 
