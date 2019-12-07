@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.352
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CasinoMachine", "CasinoMachine\CasinoMachine.csproj", "{869C2DE1-EDBF-4A92-842E-C493EB230676}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoringWalker", "BoringWalker\BoringWalker.csproj", "{ED2ED591-178B-450C-A601-35ED6E32E9DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicAirlock", "BasicAirlock\BasicAirlock.csproj", "{066A8D01-82AC-470C-99AF-369E2E9213F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicPlanetaryDrone", "BasicPlanetaryDrone\BasicPlanetaryDrone.csproj", "{1F1563D9-96E2-48B1-A2E4-F55E89905012}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{869C2DE1-EDBF-4A92-842E-C493EB230676}.Debug|x64.ActiveCfg = Debug|x64
+		{869C2DE1-EDBF-4A92-842E-C493EB230676}.Debug|x64.Build.0 = Debug|x64
+		{ED2ED591-178B-450C-A601-35ED6E32E9DF}.Debug|x64.ActiveCfg = Debug|x64
+		{ED2ED591-178B-450C-A601-35ED6E32E9DF}.Debug|x64.Build.0 = Debug|x64
+		{066A8D01-82AC-470C-99AF-369E2E9213F2}.Debug|x64.ActiveCfg = Debug|x64
+		{066A8D01-82AC-470C-99AF-369E2E9213F2}.Debug|x64.Build.0 = Debug|x64
+		{1F1563D9-96E2-48B1-A2E4-F55E89905012}.Debug|x64.ActiveCfg = Debug|x64
+		{1F1563D9-96E2-48B1-A2E4-F55E89905012}.Debug|x64.Build.0 = Debug|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {31290FA0-1050-4CAB-9D9D-45C2F4F436E0}
+	EndGlobalSection
+EndGlobal
